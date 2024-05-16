@@ -21,6 +21,8 @@ for i in L:
     rho.append(float(i[1]))
 
 plt.plot(np.array(profondeur), np.array(rho), '+')
+plt.title('rho = f(z)')
 plt.xlabel("profondeur en m")
 plt.ylabel("rho en kg/m3")
+plt.grid()
 plt.show()
