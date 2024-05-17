@@ -11,15 +11,14 @@ L = []
 for i in lignes:
     L.append(i.split(" "))
 
-for i in L:
-    i[1] = i[1][:-1]
-
 profondeur = []
 rho = []
 
 for i in L:
+    i[1] = i[1][:-1]
     profondeur.append(float(i[0]))
     rho.append(float(i[1]))
+
 
 f = interpolate.interp1d(profondeur, rho, kind = 'quadratic')
 x = np.linspace(min(profondeur), max(profondeur), 50)
