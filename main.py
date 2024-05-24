@@ -48,7 +48,7 @@ V = mf/f(10) #en m3
 D = 11.3e-2 #en m
 S = np.pi*(D/2)**2 #en m3
 C = 1
-N=10000
+N = 10000
 h = 0.05
 n = 0.00108
 t = np.linspace(0, 100, N+1)
@@ -87,19 +87,15 @@ def euler():
 #euler()
 
 def correc(kp, ki, kd, z_cible):
-    T = 10
-    c = 0
     V = mf/f1(0)
     for i in range(N):
         X[i+1] = X[i] + h*g(X[i], V)
         y[i+1] = X[i+1][0]
         v[i+1] = X[i+1][1]
-        c+=1
-        if c == T:
-            c=0
-            V = mf / f1(y[i + 1])
-            dV = kp * (mf/f1(z_cible)-V)
-            V += dV
+        V = mf / f1(y[i + 1])
+        V_prec = mf / f1(y[i])
+        dV = kp * (mf/f1(z_cible)-V) + ki*(mf/f1(z_cible)-V)*dt + kd * ((mf/f1(z_cible)-V) - (mf/f1(z_cible)-V_prec))/dt
+        V += dV
     plt.plot(t, np.array(y), '--', label='Profondeur')
     plt.plot(t, v, label='vitesse')
     plt.xlabel("temps")
@@ -109,4 +105,4 @@ def correc(kp, ki, kd, z_cible):
     plt.show()
 
 
-correc(1, 1, 1, 10)
+correc(2, 2, 2, 10)
