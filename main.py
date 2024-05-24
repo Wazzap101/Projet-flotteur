@@ -89,7 +89,11 @@ def euler():
 def correc(kp, ki, kd, z_cible):
     V = mf/f1(0)
     for i in range(N):
-        X[i+1] = X[i] + h*g(X[i], V)
+        k1 = h*g(X[i], V)
+        k2 = h*g(X[i] + k1/2, V)
+        k3 = h*g(X[i]+ k2/2, V)
+        k4 = h*g(X[i]+k3, V)
+        X[i+1] = X[i] + (1/6)*(k1 + 2*k2 + 2*k3 + k4)
         y[i+1] = X[i+1][0]
         v[i+1] = X[i+1][1]
         V = mf / f1(y[i + 1])
