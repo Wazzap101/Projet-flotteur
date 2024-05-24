@@ -98,6 +98,7 @@ def correc(kp, ki, kd, z_cible):
         if c == T:
             c=0
             dV = kp * (mf/f1(z_cible)-V)
+            V = mf/f1(y[i+1])
             V += dV
     plt.plot(t, np.array(y), '--', label='Profondeur')
     plt.plot(t, v, label='vitesse')
