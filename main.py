@@ -51,9 +51,9 @@ C = 1
 N=10000
 h = 0.05
 n = 0.00108
-t = np.linspace(0, 1000, N+1)
+t = np.linspace(0, 100, N+1)
 g = 9.8 #m/s-2
-dt = 1000/N
+dt = 100/N
 
 
 def g(X, V):
@@ -89,7 +89,7 @@ def euler():
 def correc(kp, ki, kd, z_cible):
     T = 10
     c = 0
-    V = mf/f1(z_cible)
+    V = mf/f1(0)
     for i in range(N):
         X[i+1] = X[i] + h*g(X[i], V)
         y[i+1] = X[i+1][0]
@@ -97,7 +97,7 @@ def correc(kp, ki, kd, z_cible):
         c+=1
         if c == T:
             c=0
-            dV = kp * (mf/f1(z_cible)-mf/f1(y[i+1]))
+            dV = kp * (mf/f1(z_cible)-V)
             V += dV
     plt.plot(t, np.array(y), '--', label='Profondeur')
     plt.plot(t, v, label='vitesse')
@@ -108,4 +108,4 @@ def correc(kp, ki, kd, z_cible):
     plt.show()
 
 
-correc(2, 1, 1, 10)
+correc(1, 1, 1, 10)
