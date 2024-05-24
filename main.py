@@ -38,7 +38,7 @@ def f1(depth):
     if depth < min(profondeur) or depth > max(profondeur):
         if depth < min(profondeur):
             depth = min(profondeur)
-        else:
+        if depth > max(profondeur) :
             depth = max(profondeur)
     return f(depth)
 
@@ -48,7 +48,7 @@ V = mf/f(10) #en m3
 D = 11.3e-2 #en m
 S = np.pi*(D/2)**2 #en m3
 C = 1
-N = 10000
+N = 30000
 h = 0.05
 n = 0.00108
 t = np.linspace(0, 100, N+1)
@@ -109,4 +109,4 @@ def correc(kp, ki, kd, z_cible):
     plt.show()
 
 
-correc(2, 2, 2, 10)
+correc(2, 2, 2, 30)
